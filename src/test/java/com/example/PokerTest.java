@@ -33,16 +33,29 @@ public class PokerTest {
     //then
     Assertions.assertEquals("player2 win", result);
   }
+
   @Test
-  void should_return_game_draw_when_compare_cards_given_2C5C7D8SQH_and_2C5C7D8SQH() {
+  void should_return_game_draw_when_compare_cards_given_5D8C9SJSAC_and_5D8C9SJSAC() {
     //given
-    String[] player2Cards = {"5D", "8C", "9S", "JS", "AC"};
     String[] player1Cards = {"5D", "8C", "9S", "JS", "AC"};
+    String[] player2Cards = {"5D", "8C", "9S", "JS", "AC"};
     PokerPlayer pokerPlayer = new PokerPlayer();
     //when
     String result = pokerPlayer.compare(player1Cards, player2Cards);
     //then
     Assertions.assertEquals("Game draw", result);
+  }
+
+  @Test
+  void should_return_game_draw_when_compare_cards_given_2C5C7D8SQH_and_2D6D6S8HQC() {
+    //given
+    String[] player1Cards = {"2D", "6D", "6S", "8H", "QC"};
+    String[] player2Cards = {"2C", "5C", "7D", "8S", "QH"};
+    PokerPlayer pokerPlayer = new PokerPlayer();
+    //when
+    String result = pokerPlayer.compare(player1Cards, player2Cards);
+    //then
+    Assertions.assertEquals("player1 win", result);
   }
 
 }

@@ -1,7 +1,6 @@
 package com.example;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 
 /**
@@ -17,18 +16,27 @@ public class PokerPlayer {
   private final String K = "13";
 
   public String compare(String[] player1Cards, String[] player2Cards) {
-    Integer [] player1CardsValue = changeStringToInteger(player1Cards);
+    Integer[] player1CardsValue = changeStringToInteger(player1Cards);
     Integer[] player2CardsValue = changeStringToInteger(player2Cards);
-    return compareSimpleCars(player1CardsValue,player2CardsValue);
+    return comparePairCards(player1CardsValue, player2CardsValue);
   }
 
-  private String compareSimpleCars(Integer [] player1CardsValue, Integer[] player2CardsValue) {
+  private String compareSimpleCars(Integer[] player1CardsValue, Integer[] player2CardsValue) {
     Integer player1MaxCard = getMaxCard(player1CardsValue);
     Integer player2MaxCard = getMaxCard(player2CardsValue);
-    if(player1MaxCard == player2MaxCard){
+    if (player1MaxCard == player2MaxCard) { //todo
       return "Game draw";
     }
     return player1MaxCard > player2MaxCard ? "player1 win" : "player2 win";
+  }
+
+  private String comparePairCards(Integer[] player1CardsValue, Integer[] player2CardsValue) {
+    Integer player1PairCardValue = getPairCardValue(player1CardsValue);
+    Integer player2PairCardValue = getPairCardValue(player2CardsValue);
+    if(player1PairCardValue == player2PairCardValue && player1PairCardValue ==0){
+      return compareSimpleCars(player1CardsValue,player2CardsValue);
+    }
+    return player1PairCardValue > player2PairCardValue ? "player1 win" : "player2 win";
   }
 
   private Integer getMaxCard(Integer[] playerCards) {
@@ -56,6 +64,15 @@ public class PokerPlayer {
       default:
         return Integer.parseInt(value);
     }
+  }
 
+  private Integer getPairCardValue(Integer[] playerCards) {
+    Arrays.sort(playerCards);
+    for (int index = 0; index < playerCards.length - 1; index++) {
+      if(playerCards[index] == playerCards[index + 1]){
+        return playerCards[index];
+      }
+    }
+    return 0;
   }
 }
