@@ -1,6 +1,8 @@
 package com.example;
 
 import java.util.Arrays;
+import java.util.Collections;
+
 public class PokerPlayer {
 
   public String compare(String[] player1Cards, String[] player2Cards) {
@@ -10,6 +12,8 @@ public class PokerPlayer {
   }
 
   private String compareSimpleCars(Integer[] player1CardsValue, Integer[] player2CardsValue) {
+    Arrays.sort(player1CardsValue);
+    Arrays.sort(player2CardsValue);
     for(int index = 0 ; index < player1CardsValue.length ; index ++ ){
       if(player1CardsValue[index] > player2CardsValue[index]){
         return "player1 win";
