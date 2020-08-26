@@ -1,23 +1,22 @@
 package com.example;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class PokerPlayer {
 
   public String compare(String[] player1Cards, String[] player2Cards) {
     Integer[] player1CardsValue = changeStringToInteger(player1Cards);
     Integer[] player2CardsValue = changeStringToInteger(player2Cards);
-    return comparePairCards(player1CardsValue, player2CardsValue);
+    return compareThreeOfAKind(player1CardsValue, player2CardsValue);
   }
 
   private String compareSimpleCars(Integer[] player1CardsValue, Integer[] player2CardsValue) {
     Arrays.sort(player1CardsValue);
     Arrays.sort(player2CardsValue);
-    for(int index = 0 ; index < player1CardsValue.length ; index ++ ){
-      if(player1CardsValue[index] > player2CardsValue[index]){
+    for (int index = 0; index < player1CardsValue.length; index++) {
+      if (player1CardsValue[index] > player2CardsValue[index]) {
         return "player1 win";
-      }else if(player1CardsValue[index] < player2CardsValue[index]){
+      } else if (player1CardsValue[index] < player2CardsValue[index]) {
         return "player2 win";
       }
     }
@@ -27,10 +26,32 @@ public class PokerPlayer {
   private String comparePairCards(Integer[] player1CardsValue, Integer[] player2CardsValue) {
     Integer player1PairCardValue = getPairCardValue(player1CardsValue);
     Integer player2PairCardValue = getPairCardValue(player2CardsValue);
-    if(player1PairCardValue == player2PairCardValue && player1PairCardValue ==0){
-      return compareSimpleCars(player1CardsValue,player2CardsValue);
+    if (player1PairCardValue == player2PairCardValue && player1PairCardValue == 0) {
+      return compareSimpleCars(player1CardsValue, player2CardsValue);
     }
     return player1PairCardValue > player2PairCardValue ? "player1 win" : "player2 win";
+  }
+
+  private String compareThreeOfAKind(Integer[] player1CardsValue, Integer[] player2CardsValue) {
+    Boolean isPlayer1HaveThreeOfAKind = isThreeOfAKind(player1CardsValue);
+    Boolean isPlayer2HaveThreeOfAKind = isThreeOfAKind(player2CardsValue);
+    if (isPlayer1HaveThreeOfAKind && !isPlayer2HaveThreeOfAKind) {
+      return "player1 win";
+    } else if (!isPlayer1HaveThreeOfAKind && isPlayer2HaveThreeOfAKind) {
+      return "player2 win";
+    }
+    return comparePairCards(player1CardsValue, player2CardsValue);
+  }
+
+  private Boolean isThreeOfAKind(Integer[] playerCardsValue) {
+    Arrays.sort(playerCardsValue);
+    for (int index = 0; index < playerCardsValue.length - 2; index++) {
+      if (playerCardsValue[index] == playerCardsValue[index + 1]
+          && playerCardsValue[index] == playerCardsValue[index + 2]) {
+        return true;
+      }
+    }
+    return false;
   }
 
   private Integer[] changeStringToInteger(String[] playerCards) {
@@ -59,7 +80,7 @@ public class PokerPlayer {
   private Integer getPairCardValue(Integer[] playerCards) {
     Arrays.sort(playerCards);
     for (int index = 0; index < playerCards.length - 1; index++) {
-      if(playerCards[index] == playerCards[index + 1]){
+      if (playerCards[index] == playerCards[index + 1]) {
         return playerCards[index];
       }
     }
