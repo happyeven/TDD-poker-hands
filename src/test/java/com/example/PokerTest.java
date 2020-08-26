@@ -67,5 +67,16 @@ public class PokerTest {
     //then
     Assertions.assertEquals("player1 win", result);
   }
-
+  @Test
+  void should_return_player2_win_when_compare_cards_given_2C7C7D8SQH_and_2D6D6S8HQC() {
+    //given
+    String[] player1Cards = {"2D", "6D", "6S", "8H", "QC"};
+    String[] player2Cards = {"2C", "7C", "7D", "8S", "QH"};
+    PokerPlayer pokerPlayer = new PokerPlayer();
+    //when
+    String result = pokerPlayer.compare(player1Cards, player2Cards);
+    //then
+    Assertions.assertEquals("player2 win", result);
+  }
+  
 }
