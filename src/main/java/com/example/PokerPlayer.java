@@ -1,13 +1,6 @@
 package com.example;
 
 import java.util.Arrays;
-import java.util.Collections;
-
-/**
- * @Author ZHUDO2
- * @Date 8/26/2020 1:40 PM
- * @Version 1.0
- */
 public class PokerPlayer {
 
   public String compare(String[] player1Cards, String[] player2Cards) {
@@ -34,10 +27,6 @@ public class PokerPlayer {
       return compareSimpleCars(player1CardsValue,player2CardsValue);
     }
     return player1PairCardValue > player2PairCardValue ? "player1 win" : "player2 win";
-  }
-
-  private Integer getMaxCard(Integer[] playerCards) {
-    return Collections.max(Arrays.asList(playerCards));
   }
 
   private Integer[] changeStringToInteger(String[] playerCards) {
