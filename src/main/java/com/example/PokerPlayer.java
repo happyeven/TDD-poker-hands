@@ -17,12 +17,14 @@ public class PokerPlayer {
   }
 
   private String compareSimpleCars(Integer[] player1CardsValue, Integer[] player2CardsValue) {
-    Integer player1MaxCard = getMaxCard(player1CardsValue);
-    Integer player2MaxCard = getMaxCard(player2CardsValue);
-    if (player1MaxCard == player2MaxCard) { //todo
-      return "Game draw";
+    for(int index = 0 ; index < player1CardsValue.length ; index ++ ){
+      if(player1CardsValue[index] > player2CardsValue[index]){
+        return "player1 win";
+      }else if(player1CardsValue[index] < player2CardsValue[index]){
+        return "player2 win";
+      }
     }
-    return player1MaxCard > player2MaxCard ? "player1 win" : "player2 win";
+    return "Tie";
   }
 
   private String comparePairCards(Integer[] player1CardsValue, Integer[] player2CardsValue) {

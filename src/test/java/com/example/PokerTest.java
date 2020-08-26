@@ -43,7 +43,7 @@ public class PokerTest {
     //when
     String result = pokerPlayer.compare(player1Cards, player2Cards);
     //then
-    Assertions.assertEquals("Game draw", result);
+    Assertions.assertEquals("Tie", result);
   }
 
   @Test
