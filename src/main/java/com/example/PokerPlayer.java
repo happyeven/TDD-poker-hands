@@ -19,7 +19,7 @@ public class PokerPlayer {
   public String compare(String[] player1Cards, String[] player2Cards) {
     Integer [] player1CardsValue = changeStringToInteger(player1Cards);
     Integer[] player2CardsValue = changeStringToInteger(player2Cards);
-    return "player1 win";
+    return compareSimpleCars(player1CardsValue,player2CardsValue);
   }
 
   private String compareSimpleCars(Integer [] player1CardsValue, Integer[] player2CardsValue) {
