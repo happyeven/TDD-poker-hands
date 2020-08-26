@@ -38,7 +38,7 @@ public class PokerTest {
   void should_return_game_draw_when_compare_cards_given_5D8C9SJSAC_and_5D8C9SJSAC() {
     //given
     String[] player1Cards = {"5D", "8C", "9S", "JS", "AC"};
-    String[] player2Cards = {"5D", "8C", "9S", "JS", "AC"};
+    String[] player2Cards = {"5C", "8D", "9H", "JC", "AD"};
     PokerPlayer pokerPlayer = new PokerPlayer();
     //when
     String result = pokerPlayer.compare(player1Cards, player2Cards);

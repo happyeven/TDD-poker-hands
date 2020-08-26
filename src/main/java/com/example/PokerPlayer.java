@@ -10,11 +10,6 @@ import java.util.Collections;
  */
 public class PokerPlayer {
 
-  private final String J = "11";
-  private final String A = "14";
-  private final String Q = "12";
-  private final String K = "13";
-
   public String compare(String[] player1Cards, String[] player2Cards) {
     Integer[] player1CardsValue = changeStringToInteger(player1Cards);
     Integer[] player2CardsValue = changeStringToInteger(player2Cards);
