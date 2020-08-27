@@ -33,25 +33,27 @@ public class PokerPlayer {
   }
 
   private String compareThreeOfAKind(Integer[] player1CardsValue, Integer[] player2CardsValue) {
-    Boolean isPlayer1HaveThreeOfAKind = isThreeOfAKind(player1CardsValue);
-    Boolean isPlayer2HaveThreeOfAKind = isThreeOfAKind(player2CardsValue);
-    if (isPlayer1HaveThreeOfAKind && !isPlayer2HaveThreeOfAKind) {
+    Integer player1HaveThreeOfAKind = isThreeOfAKind(player1CardsValue);
+    Integer player2HaveThreeOfAKind = isThreeOfAKind(player2CardsValue);
+    if (player1HaveThreeOfAKind > player2HaveThreeOfAKind) {
       return "player1 win";
-    } else if (!isPlayer1HaveThreeOfAKind && isPlayer2HaveThreeOfAKind) {
+    } else if (player1HaveThreeOfAKind < player2HaveThreeOfAKind) {
       return "player2 win";
     }
     return comparePairCards(player1CardsValue, player2CardsValue);
   }
 
-  private Boolean isThreeOfAKind(Integer[] playerCardsValue) {
+
+
+  private Integer isThreeOfAKind(Integer[] playerCardsValue) {
     Arrays.sort(playerCardsValue);
     for (int index = 0; index < playerCardsValue.length - 2; index++) {
       if (playerCardsValue[index] == playerCardsValue[index + 1]
           && playerCardsValue[index] == playerCardsValue[index + 2]) {
-        return true;
+        return playerCardsValue[index];
       }
     }
-    return false;
+    return 0;
   }
 
   private Integer[] changeStringToInteger(String[] playerCards) {
