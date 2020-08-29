@@ -36,4 +36,14 @@ public class PokerUtils {
         }
         return 0;
     }
+
+    public static Integer getPairCardValue(Integer[] playerCards) {
+        Arrays.sort(playerCards);
+        for (int index = 0; index < playerCards.length - 1; index++) {
+            if (playerCards[index] == playerCards[index + 1]) {
+                return playerCards[index];
+            }
+        }
+        return 0;
+    }
 }

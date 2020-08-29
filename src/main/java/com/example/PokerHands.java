@@ -28,8 +28,8 @@ public class PokerHands {
     }
 
     private String comparePairCards(Integer[] player1CardsValue, Integer[] player2CardsValue) {
-        Integer player1PairCardValue = getPairCardValue(player1CardsValue);
-        Integer player2PairCardValue = getPairCardValue(player2CardsValue);
+        Integer player1PairCardValue = PokerUtils.getPairCardValue(player1CardsValue);
+        Integer player2PairCardValue = PokerUtils.getPairCardValue(player2CardsValue);
         if (player1PairCardValue == player2PairCardValue && player1PairCardValue == 0) {
             return compareSimpleCars(player1CardsValue, player2CardsValue);
         }
@@ -45,15 +45,5 @@ public class PokerHands {
             return PLAYER2_WIN;
         }
         return comparePairCards(player1CardsValue, player2CardsValue);
-    }
-
-    private Integer getPairCardValue(Integer[] playerCards) {
-        Arrays.sort(playerCards);
-        for (int index = 0; index < playerCards.length - 1; index++) {
-            if (playerCards[index] == playerCards[index + 1]) {
-                return playerCards[index];
-            }
-        }
-        return 0;
     }
 }
