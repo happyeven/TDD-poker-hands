@@ -3,6 +3,25 @@ package com.example;
 import java.util.Arrays;
 
 public class PokerUtils {
+
+    public static CardType getCardType(String[] playerCards){
+        Integer[] playerCardsValue = changeStringToInteger(playerCards);
+        Arrays.sort(playerCardsValue);
+        for (int index = 0; index < playerCardsValue.length - 1; index++) {
+            if (isThreeOfAKind(playerCardsValue, index)){
+                return CardType.THREE_OF_KIND;
+            }else if (playerCardsValue[index] == playerCardsValue[index + 1]) {
+                return CardType.PAIR;
+            }
+        }
+        return CardType.HIGH_CARD;
+    }
+
+    private static boolean isThreeOfAKind(Integer[] playerCardsValue, int index) {
+        return playerCardsValue[index] == playerCardsValue[index + 1]
+                && playerCardsValue[index] == playerCardsValue[index + 2];
+    }
+
     public static Integer[] changeStringToInteger(String[] playerCards) {
         Integer[] result = new Integer[5];
         for (int index = 0; index < playerCards.length; index++) {
@@ -24,26 +43,5 @@ public class PokerUtils {
             default:
                 return Integer.parseInt(value);
         }
-    }
-
-    public static Integer isThreeOfAKind(Integer[] playerCardsValue) {
-        Arrays.sort(playerCardsValue);
-        for (int index = 0; index < playerCardsValue.length - 2; index++) {
-            if (playerCardsValue[index] == playerCardsValue[index + 1]
-                    && playerCardsValue[index] == playerCardsValue[index + 2]) {
-                return playerCardsValue[index];
-            }
-        }
-        return 0;
-    }
-
-    public static Integer getPairCardValue(Integer[] playerCards) {
-        Arrays.sort(playerCards);
-        for (int index = 0; index < playerCards.length - 1; index++) {
-            if (playerCards[index] == playerCards[index + 1]) {
-                return playerCards[index];
-            }
-        }
-        return 0;
     }
 }

@@ -8,42 +8,35 @@ public class PokerHands {
     private static final String PLAYER2_WIN = "player2 win";
     private static final String TIE = "Tie";
 
-    public String compare(String[] player1Cards, String[] player2Cards) {
-        Integer[] player1CardsValue = PokerUtils.changeStringToInteger(player1Cards);
-        Integer[] player2CardsValue = PokerUtils.changeStringToInteger(player2Cards);
-        return compareThreeOfAKind(player1CardsValue, player2CardsValue);
-    }
-
-    private String compareSimpleCars(Integer[] player1CardsValue, Integer[] player2CardsValue) {
-        Arrays.sort(player1CardsValue);
-        Arrays.sort(player2CardsValue);
-        for (int index = 0; index < player1CardsValue.length; index++) {
-            if (player1CardsValue[index] > player2CardsValue[index]) {
-                return PLAYER1_WIN;
-            } else if (player1CardsValue[index] < player2CardsValue[index]) {
-                return PLAYER2_WIN;
-            }
+    public String play(String[] player1Cards, String[] player2Cards) {
+        if (compareCard(player1Cards, player2Cards) > 0) {
+            return PLAYER1_WIN;
+        } else if (compareCard(player1Cards, player2Cards) < 0) {
+            return PLAYER2_WIN;
         }
         return TIE;
     }
 
-    private String comparePairCards(Integer[] player1CardsValue, Integer[] player2CardsValue) {
-        Integer player1PairCardValue = PokerUtils.getPairCardValue(player1CardsValue);
-        Integer player2PairCardValue = PokerUtils.getPairCardValue(player2CardsValue);
-        if (player1PairCardValue == player2PairCardValue && player1PairCardValue == 0) {
-            return compareSimpleCars(player1CardsValue, player2CardsValue);
+    private Integer compareCard(String[] player1Cards, String[] player2Cards) {
+        if (!PokerUtils.getCardType(player1Cards).equals(PokerUtils.getCardType(player2Cards))) {
+            return PokerUtils.getCardType(player1Cards).getWeight() - PokerUtils.getCardType(player2Cards).getWeight();
         }
-        return player1PairCardValue > player2PairCardValue ? PLAYER1_WIN : PLAYER2_WIN;
+        Integer[] player1CardsValue = PokerUtils.changeStringToInteger(player1Cards);
+        Integer[] player2CardsValue = PokerUtils.changeStringToInteger(player2Cards);
+        sort(player1CardsValue, player2CardsValue);
+        for (int index = 0; index < player1CardsValue.length; index++) {
+            if (player1CardsValue[index] > player2CardsValue[index]) {
+                return 1;
+            } else if (player1CardsValue[index] < player2CardsValue[index]) {
+                return -1;
+            }
+        }
+        return 0;
     }
 
-    private String compareThreeOfAKind(Integer[] player1CardsValue, Integer[] player2CardsValue) {
-        Integer player1HaveThreeOfAKind = PokerUtils.isThreeOfAKind(player1CardsValue);
-        Integer player2HaveThreeOfAKind = PokerUtils.isThreeOfAKind(player2CardsValue);
-        if (player1HaveThreeOfAKind > player2HaveThreeOfAKind) {
-            return PLAYER1_WIN;
-        } else if (player1HaveThreeOfAKind < player2HaveThreeOfAKind) {
-            return PLAYER2_WIN;
-        }
-        return comparePairCards(player1CardsValue, player2CardsValue);
+    private void sort(Integer[] player1CardsValue, Integer[] player2CardsValue) {
+        Arrays.sort(player1CardsValue);
+        Arrays.sort(player2CardsValue);
     }
+
 }
