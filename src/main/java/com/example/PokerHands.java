@@ -36,6 +36,7 @@ public class PokerHands {
         }
         return 0;
     }
+
     private Integer compareHighCardNumber(Integer[] player1CardsValue, Integer[] player2CardsValue) {
         for (int index = player1CardsValue.length - 1; index >= 0; index--) {
             if (player1CardsValue[index] > player2CardsValue[index]) {

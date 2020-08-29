@@ -9,14 +9,16 @@ public class PokerUtils {
     public static CardType getCardType(String[] playerCards) {
         Integer[] playerCardsValue = changeStringToInteger(playerCards);
         Arrays.sort(playerCardsValue);
-        if(isFlush(playerCards)){
+        if (isFlush(playerCards)) {
             return CardType.FLUSH;
         }
         if (isStraight(playerCardsValue)) {
             return CardType.STRAIGHT;
         }
         for (int index = 0; index < playerCardsValue.length - 1; index++) {
-            if (isThreeOfAKind(playerCardsValue, index)) {
+            if (isFullHouse(playerCardsValue, index)) {
+                return CardType.FULL_HOUSE;
+            } else if (isThreeOfAKind(playerCardsValue, index)) {
                 return CardType.THREE_OF_KIND;
             } else if (isTwoPairs(playerCardsValue, index)) {
                 return CardType.TWO_PAIR;
@@ -27,17 +29,32 @@ public class PokerUtils {
         return CardType.HIGH_CARD;
     }
 
+    private static boolean isFullHouse(Integer[] playerCardsValue, int index) {
+        if (isThreeOfAKind(playerCardsValue, index)) {
+            Integer highFrequencyNum = getHighFrequencyNumberFromArray(playerCardsValue);
+            int exceptHighFrequencyNumLength = Arrays.stream(playerCardsValue)
+                    .filter(num -> num != highFrequencyNum)
+                    .distinct()
+                    .toArray().length;
+            if (exceptHighFrequencyNumLength == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static boolean isFlush(String[] playerCards) {
         String[] cardsClass = getCardsClass(playerCards);
         return new HashSet<>(Arrays.asList(cardsClass)).size() == 1;
     }
 
-    private static String[] getCardsClass(String[] playerCards){
+    private static String[] getCardsClass(String[] playerCards) {
         List<String> collect = Stream.of(playerCards)
                 .map(card -> card.length() == 2 ? card.charAt(1) + "" : card.charAt(2) + "")
                 .collect(Collectors.toList());
         return collect.toArray(new String[collect.size()]);
     }
+
     private static boolean isStraight(Integer[] playerCardsValue) {
         for (int index = 0; index < playerCardsValue.length - 1; index++) {
             if (playerCardsValue[index] + 1 != playerCardsValue[index + 1]) {
