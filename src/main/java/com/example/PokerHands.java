@@ -27,9 +27,11 @@ public class PokerHands {
         PokerUtils.sort(player1CardsValue, player2CardsValue);
         if (PokerUtils.getCardType(player1Cards).equals(CardType.FLUSH)) {
             return compareHighCardNumber(player1CardsValue, player2CardsValue);
-        } else if (!PokerUtils.getCardType(player1Cards).equals(CardType.HIGH_CARD)) {
+        }
+        if (!PokerUtils.getCardType(player1Cards).equals(CardType.HIGH_CARD)) {
             return compareFrequencyNum(player1CardsValue, player2CardsValue);
-        } else if (PokerUtils.getCardType(player1Cards).equals(CardType.HIGH_CARD)) {
+        }
+        if (PokerUtils.getCardType(player1Cards).equals(CardType.HIGH_CARD)) {
             return compareHighCardNumber(player1CardsValue, player2CardsValue);
         }
         return 0;
