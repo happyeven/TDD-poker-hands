@@ -29,12 +29,16 @@ public class PokerUtils {
 
     private static boolean isFlush(String[] playerCards) {
         for (int index = 0; index < playerCards.length - 1; index++) {
-            int oneDetailCardLength = playerCards[index].length();
-            if (!playerCards[index].substring(oneDetailCardLength-1).equals(playerCards[index + 1].substring(oneDetailCardLength-1))) {
+            if (!isPreviousSuitSameAsNextSuit(playerCards, index)) {
                 return false;
             }
         }
         return true;
+    }
+
+    private static boolean isPreviousSuitSameAsNextSuit(String[] playerCards, int index) {
+        int oneDetailCardLength = playerCards[index].length();
+        return playerCards[index].substring(oneDetailCardLength - 1).equals(playerCards[index + 1].substring(oneDetailCardLength - 1));
     }
 
     private static boolean isStraight(Integer[] playerCardsValue) {
