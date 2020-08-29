@@ -9,6 +9,9 @@ public class PokerUtils {
     public static CardType getCardType(String[] playerCards) {
         Integer[] playerCardsValue = changeStringToInteger(playerCards);
         Arrays.sort(playerCardsValue);
+        if(isStraightFlush(playerCardsValue,playerCards)){
+            return CardType.STRAIGHT_FLUSH;
+        }
         if(isFourOfAKind(playerCardsValue)){
             return CardType.FOUR_OF_KIND;
         }
@@ -30,6 +33,10 @@ public class PokerUtils {
             }
         }
         return CardType.HIGH_CARD;
+    }
+
+    private static boolean isStraightFlush(Integer[] playerCardsValue,String[] playerCards) {
+        return isFlush(playerCards)&&isStraight(playerCardsValue);
     }
 
     private static boolean isFourOfAKind(Integer[] playerCardsValue) {
