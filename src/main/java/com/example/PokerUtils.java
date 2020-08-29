@@ -12,6 +12,9 @@ public class PokerUtils {
         if (isStraight(playerCardsValue)) {
             return CardType.STRAIGHT;
         }
+        if (isFlush(playerCards)) {
+            return CardType.FLUSH;
+        }
         for (int index = 0; index < playerCardsValue.length - 1; index++) {
             if (isThreeOfAKind(playerCardsValue, index)) {
                 return CardType.THREE_OF_KIND;
@@ -22,6 +25,16 @@ public class PokerUtils {
             }
         }
         return CardType.HIGH_CARD;
+    }
+
+    private static boolean isFlush(String[] playerCards) {
+        for (int index = 0; index < playerCards.length - 1; index++) {
+            int oneDetailCardLength = playerCards[index].length();
+            if (!playerCards[index].substring(oneDetailCardLength-1).equals(playerCards[index + 1].substring(oneDetailCardLength-1))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static boolean isStraight(Integer[] playerCardsValue) {
