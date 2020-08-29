@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.Arrays;
+
 public class PokerUtils {
     public static Integer[] changeStringToInteger(String[] playerCards) {
         Integer[] result = new Integer[5];
@@ -22,5 +24,16 @@ public class PokerUtils {
             default:
                 return Integer.parseInt(value);
         }
+    }
+
+    public static Integer isThreeOfAKind(Integer[] playerCardsValue) {
+        Arrays.sort(playerCardsValue);
+        for (int index = 0; index < playerCardsValue.length - 2; index++) {
+            if (playerCardsValue[index] == playerCardsValue[index + 1]
+                    && playerCardsValue[index] == playerCardsValue[index + 2]) {
+                return playerCardsValue[index];
+            }
+        }
+        return 0;
     }
 }
