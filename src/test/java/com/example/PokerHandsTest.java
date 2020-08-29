@@ -220,6 +220,6 @@ public class PokerHandsTest {
         //when
         String result = pokerHands.play(player1Cards, player2Cards);
         //then
-        Assertions.assertEquals("player2 win", result);
+        Assertions.assertEquals("player1 win", result);
     }
 }
