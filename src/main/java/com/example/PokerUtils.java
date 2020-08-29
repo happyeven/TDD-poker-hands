@@ -9,6 +9,9 @@ public class PokerUtils {
     public static CardType getCardType(String[] playerCards) {
         Integer[] playerCardsValue = changeStringToInteger(playerCards);
         Arrays.sort(playerCardsValue);
+        if(isFourOfAKind(playerCardsValue)){
+            return CardType.FOUR_OF_KIND;
+        }
         if (isFlush(playerCards)) {
             return CardType.FLUSH;
         }
@@ -27,6 +30,10 @@ public class PokerUtils {
             }
         }
         return CardType.HIGH_CARD;
+    }
+
+    private static boolean isFourOfAKind(Integer[] playerCardsValue) {
+        return playerCardsValue[0] == playerCardsValue[3] || playerCardsValue[1] == playerCardsValue[4];
     }
 
     private static boolean isFullHouse(Integer[] playerCardsValue, int index) {

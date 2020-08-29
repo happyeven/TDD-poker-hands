@@ -249,4 +249,15 @@ public class PokerHandsTest {
         //then
         Assertions.assertEquals("player1 win", result);
     }
+    @Test
+    void should_return_player1_win_when_compare_cards_given_four_of_kind_and_full_house() {
+        //given
+        String[] player1Cards = {"4H", "4D", "4C", "6C", "4S"};
+        String[] player2Cards = {"3H", "3D", "5S", "5C", "3S"};
+        PokerHands pokerHands = new PokerHands();
+        //when
+        String result = pokerHands.play(player1Cards, player2Cards);
+        //then
+        Assertions.assertEquals("player1 win", result);
+    }
 }
