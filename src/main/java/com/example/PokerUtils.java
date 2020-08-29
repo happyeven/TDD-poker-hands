@@ -1,6 +1,6 @@
 package com.example;
 
-import java.util.Arrays;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -9,11 +9,11 @@ public class PokerUtils {
     public static CardType getCardType(String[] playerCards) {
         Integer[] playerCardsValue = changeStringToInteger(playerCards);
         Arrays.sort(playerCardsValue);
+        if(isFlush(playerCards)){
+            return CardType.FLUSH;
+        }
         if (isStraight(playerCardsValue)) {
             return CardType.STRAIGHT;
-        }
-        if (isFlush(playerCards)) {
-            return CardType.FLUSH;
         }
         for (int index = 0; index < playerCardsValue.length - 1; index++) {
             if (isThreeOfAKind(playerCardsValue, index)) {
@@ -28,19 +28,16 @@ public class PokerUtils {
     }
 
     private static boolean isFlush(String[] playerCards) {
-        for (int index = 0; index < playerCards.length - 1; index++) {
-            if (!isPreviousSuitSameAsNextSuit(playerCards, index)) {
-                return false;
-            }
-        }
-        return true;
+        String[] cardsClass = getCardsClass(playerCards);
+        return new HashSet<>(Arrays.asList(cardsClass)).size() == 1;
     }
 
-    private static boolean isPreviousSuitSameAsNextSuit(String[] playerCards, int index) {
-        int oneDetailCardLength = playerCards[index].length();
-        return playerCards[index].substring(oneDetailCardLength - 1).equals(playerCards[index + 1].substring(oneDetailCardLength - 1));
+    private static String[] getCardsClass(String[] playerCards){
+        List<String> collect = Stream.of(playerCards)
+                .map(card -> card.length() == 2 ? card.charAt(1) + "" : card.charAt(2) + "")
+                .collect(Collectors.toList());
+        return collect.toArray(new String[collect.size()]);
     }
-
     private static boolean isStraight(Integer[] playerCardsValue) {
         for (int index = 0; index < playerCardsValue.length - 1; index++) {
             if (playerCardsValue[index] + 1 != playerCardsValue[index + 1]) {
@@ -59,6 +56,7 @@ public class PokerUtils {
         return playerCardsValue[index] == playerCardsValue[index + 1]
                 && playerCardsValue[index] == playerCardsValue[index + 2];
     }
+
 
     public static Integer[] changeStringToInteger(String[] playerCards) {
         Integer[] result = new Integer[5];

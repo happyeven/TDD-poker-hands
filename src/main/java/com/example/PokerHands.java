@@ -25,15 +25,17 @@ public class PokerHands {
         Integer[] player1CardsValue = PokerUtils.changeStringToInteger(player1Cards);
         Integer[] player2CardsValue = PokerUtils.changeStringToInteger(player2Cards);
         PokerUtils.sort(player1CardsValue, player2CardsValue);
-
+        if (PokerUtils.getCardType(player1Cards).equals(CardType.FLUSH)) {
+            return compareHighCardNumber(player1CardsValue, player2CardsValue);
+        }
         if (!PokerUtils.getCardType(player1Cards).equals(CardType.HIGH_CARD)) {
             return compareFrequencyNum(player1CardsValue, player2CardsValue);
-        } else if (PokerUtils.getCardType(player1Cards).equals(CardType.HIGH_CARD)) {
+        }
+        if (PokerUtils.getCardType(player1Cards).equals(CardType.HIGH_CARD)) {
             return compareHighCardNumber(player1CardsValue, player2CardsValue);
         }
         return 0;
     }
-
     private Integer compareHighCardNumber(Integer[] player1CardsValue, Integer[] player2CardsValue) {
         for (int index = player1CardsValue.length - 1; index >= 0; index--) {
             if (player1CardsValue[index] > player2CardsValue[index]) {
