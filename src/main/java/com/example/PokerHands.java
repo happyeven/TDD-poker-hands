@@ -1,6 +1,5 @@
 package com.example;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -47,22 +46,14 @@ public class PokerHands {
     }
 
     private int compareFrequencyNum(Integer[] player1CardsValue, Integer[] player2CardsValue) {
-        Integer player1HighFrequencyNum = getHighFrequencyNumberFromArray(player1CardsValue);
-        Integer player2HighFrequencyNum = getHighFrequencyNumberFromArray(player2CardsValue);
+        Integer player1HighFrequencyNum = PokerUtils.getHighFrequencyNumberFromArray(player1CardsValue);
+        Integer player2HighFrequencyNum = PokerUtils.getHighFrequencyNumberFromArray(player2CardsValue);
         if (player1HighFrequencyNum > player2HighFrequencyNum) {
             return 1;
         } else if (player1HighFrequencyNum < player2HighFrequencyNum) {
             return -1;
         }
         return 0;
-    }
-
-    private Integer getHighFrequencyNumberFromArray(Integer[] numbers) {
-        return Stream.of(numbers).collect(Collectors.groupingBy(Integer::valueOf))
-                .values()
-                .stream()
-                .sorted((a, b) -> b.size() - a.size())
-                .collect(Collectors.toList()).get(0).get(0);
     }
 
 }
