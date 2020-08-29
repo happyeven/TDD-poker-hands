@@ -25,7 +25,8 @@ public class PokerHands {
         }
         Integer[] player1CardsValue = PokerUtils.changeStringToInteger(player1Cards);
         Integer[] player2CardsValue = PokerUtils.changeStringToInteger(player2Cards);
-        sort(player1CardsValue, player2CardsValue);
+        PokerUtils.sort(player1CardsValue, player2CardsValue);
+
         if (!PokerUtils.getCardType(player1Cards).equals(CardType.HIGH_CARD)) {
             return compareFrequencyNum(player1CardsValue, player2CardsValue);
         } else if (PokerUtils.getCardType(player1Cards).equals(CardType.HIGH_CARD)) {
@@ -62,11 +63,6 @@ public class PokerHands {
                 .stream()
                 .sorted((a, b) -> b.size() - a.size())
                 .collect(Collectors.toList()).get(0).get(0);
-    }
-
-    private void sort(Integer[] player1CardsValue, Integer[] player2CardsValue) {
-        Arrays.sort(player1CardsValue);
-        Arrays.sort(player2CardsValue);
     }
 
 }

@@ -44,4 +44,10 @@ public class PokerUtils {
                 return Integer.parseInt(value);
         }
     }
+
+
+    public static void sort(Integer[] player1CardsValue, Integer[] player2CardsValue) {
+        Arrays.sort(player1CardsValue);
+        Arrays.sort(player2CardsValue);
+    }
 }
