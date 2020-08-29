@@ -177,4 +177,15 @@ public class PokerHandsTest {
         //then
         Assertions.assertEquals("player2 win", result);
     }
+    @Test
+    void should_return_player1_win_when_compare_cards_given_3H4D5S6C7D_and_6C7D8S9H10C_should_return_player2_win_when_compare_cards_given_3H3D5S5C7D_and_6C6D6S8HQC() {
+        //given
+        String[] player1Cards = {"3H", "4S", "5S", "6H", "7D"};
+        String[] player2Cards = {"6C", "7D", "8S", "9C", "10C"};
+        PokerHands pokerHands = new PokerHands();
+        //when
+        String result = pokerHands.play(player1Cards, player2Cards);
+        //then
+        Assertions.assertEquals("player2 win", result);
+    }
 }
