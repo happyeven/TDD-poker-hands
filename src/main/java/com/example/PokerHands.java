@@ -9,8 +9,8 @@ public class PokerHands {
     private static final String TIE = "Tie";
 
     public String compare(String[] player1Cards, String[] player2Cards) {
-        Integer[] player1CardsValue = changeStringToInteger(player1Cards);
-        Integer[] player2CardsValue = changeStringToInteger(player2Cards);
+        Integer[] player1CardsValue = PokerUtils.changeStringToInteger(player1Cards);
+        Integer[] player2CardsValue = PokerUtils.changeStringToInteger(player2Cards);
         return compareThreeOfAKind(player1CardsValue, player2CardsValue);
     }
 
@@ -57,29 +57,6 @@ public class PokerHands {
             }
         }
         return 0;
-    }
-
-    private Integer[] changeStringToInteger(String[] playerCards) {
-        Integer[] result = new Integer[5];
-        for (int index = 0; index < playerCards.length; index++) {
-            result[index] = getIntegerValue(Character.toString(playerCards[index].charAt(0)));
-        }
-        return result;
-    }
-
-    private Integer getIntegerValue(String value) {
-        switch (value) {
-            case "A":
-                return 14;
-            case "J":
-                return 11;
-            case "Q":
-                return 12;
-            case "K":
-                return 13;
-            default:
-                return Integer.parseInt(value);
-        }
     }
 
     private Integer getPairCardValue(Integer[] playerCards) {
