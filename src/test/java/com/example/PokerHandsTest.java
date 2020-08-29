@@ -199,4 +199,15 @@ public class PokerHandsTest {
         //then
         Assertions.assertEquals("player1 win", result);
     }
+    @Test
+    void should_return_player2_win_when_compare_cards_given_flush_max_cars_is_A_and_flush_max_cars_is_Q() {
+        //given
+        String[] player1Cards = {"3S", "4S", "5S", "6S", "AS"};
+        String[] player2Cards = {"6C", "7C", "8C", "9C", "QC"};
+        PokerHands pokerHands = new PokerHands();
+        //when
+        String result = pokerHands.play(player1Cards, player2Cards);
+        //then
+        Assertions.assertEquals("player2 win", result);
+    }
 }
