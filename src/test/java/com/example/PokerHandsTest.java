@@ -285,4 +285,15 @@ public class PokerHandsTest {
         //then
         Assertions.assertEquals("player2 win", result);
     }
+    @Test
+    void should_return_player2_win_when_compare_cards_given_straight_flush_end_with_6_and_straight_flush_end_with_7() {
+        //given
+        String[] player1Cards = {"6H", "2H", "3H", "4H", "5H"};
+        String[] player2Cards = {"3S", "4S", "5S", "6S", "7S"};
+        PokerHands pokerHands = new PokerHands();
+        //when
+        String result = pokerHands.play(player1Cards, player2Cards);
+        //then
+        Assertions.assertEquals("player2 win", result);
+    }
 }
