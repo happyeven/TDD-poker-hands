@@ -8,16 +8,16 @@ import org.junit.jupiter.api.Test;
  * @Date 8/26/2020 1:31 PM
  * @Version 1.0
  */
-public class PokerTest {
+public class PokerHandsTest {
 
   @Test
   void should_return_player1_win_when_compare_cards_given_5D8C9SJSAC_and_2C5C7D8SQH() {
     //given
     String[] player1Cards = {"5D", "8C", "9S", "JS", "AC"};
     String[] player2Cards = {"2C", "5C", "7D", "8S", "QH"};
-    PokerPlayer pokerPlayer = new PokerPlayer();
+    PokerHands pokerHands = new PokerHands();
     //when
-    String result = pokerPlayer.compare(player1Cards, player2Cards);
+    String result = pokerHands.compare(player1Cards, player2Cards);
     //then
     Assertions.assertEquals("player1 win", result);
   }
@@ -27,9 +27,9 @@ public class PokerTest {
     //given
     String[] player2Cards = {"5D", "8C", "9S", "JS", "AC"};
     String[] player1Cards = {"2C", "5C", "7D", "8S", "QH"};
-    PokerPlayer pokerPlayer = new PokerPlayer();
+    PokerHands pokerHands = new PokerHands();
     //when
-    String result = pokerPlayer.compare(player1Cards, player2Cards);
+    String result = pokerHands.compare(player1Cards, player2Cards);
     //then
     Assertions.assertEquals("player2 win", result);
   }
@@ -39,9 +39,9 @@ public class PokerTest {
     //given
     String[] player1Cards = {"5D", "8C", "9S", "JS", "AC"};
     String[] player2Cards = {"5C", "8D", "9H", "JC", "AD"};
-    PokerPlayer pokerPlayer = new PokerPlayer();
+    PokerHands pokerHands = new PokerHands();
     //when
-    String result = pokerPlayer.compare(player1Cards, player2Cards);
+    String result = pokerHands.compare(player1Cards, player2Cards);
     //then
     Assertions.assertEquals("Tie", result);
   }
@@ -51,9 +51,9 @@ public class PokerTest {
     //given
     String[] player1Cards = {"5D", "8C", "9S", "JS", "AC"};
     String[] player2Cards = {"5C", "8D", "9H", "QS", "AD"};
-    PokerPlayer pokerPlayer = new PokerPlayer();
+    PokerHands pokerHands = new PokerHands();
     //when
-    String result = pokerPlayer.compare(player1Cards, player2Cards);
+    String result = pokerHands.compare(player1Cards, player2Cards);
     //then
     Assertions.assertEquals("player2 win", result);
   }
@@ -63,9 +63,9 @@ public class PokerTest {
     //given
     String[] player1Cards = {"2D", "6D", "6S", "8H", "QC"};
     String[] player2Cards = {"2C", "5C", "7D", "8S", "QH"};
-    PokerPlayer pokerPlayer = new PokerPlayer();
+    PokerHands pokerHands = new PokerHands();
     //when
-    String result = pokerPlayer.compare(player1Cards, player2Cards);
+    String result = pokerHands.compare(player1Cards, player2Cards);
     //then
     Assertions.assertEquals("player1 win", result);
   }
@@ -75,9 +75,9 @@ public class PokerTest {
     //given
     String[] player1Cards = {"2D", "6D", "6S", "8H", "QC"};
     String[] player2Cards = {"2C", "7C", "7D", "8S", "QH"};
-    PokerPlayer pokerPlayer = new PokerPlayer();
+    PokerHands pokerHands = new PokerHands();
     //when
-    String result = pokerPlayer.compare(player1Cards, player2Cards);
+    String result = pokerHands.compare(player1Cards, player2Cards);
     //then
     Assertions.assertEquals("player2 win", result);
   }
@@ -87,9 +87,9 @@ public class PokerTest {
     //given
     String[] player1Cards = {"2H", "2D", "5S", "2C", "1D"};
     String[] player2Cards = {"2C", "5C", "7D", "8S", "QH"};
-    PokerPlayer pokerPlayer = new PokerPlayer();
+    PokerHands pokerHands = new PokerHands();
     //when
-    String result = pokerPlayer.compare(player1Cards, player2Cards);
+    String result = pokerHands.compare(player1Cards, player2Cards);
     //then
     Assertions.assertEquals("player1 win", result);
   }
@@ -99,9 +99,9 @@ public class PokerTest {
     //given
     String[] player1Cards = {"2H", "2D", "5S", "2C", "1D"};
     String[] player2Cards = {"2D", "6D", "6S", "8H", "QC"};
-    PokerPlayer pokerPlayer = new PokerPlayer();
+    PokerHands pokerHands = new PokerHands();
     //when
-    String result = pokerPlayer.compare(player1Cards, player2Cards);
+    String result = pokerHands.compare(player1Cards, player2Cards);
     //then
     Assertions.assertEquals("player1 win", result);
   }
@@ -110,9 +110,9 @@ public class PokerTest {
     //given
     String[] player1Cards = {"2H", "2D", "5S", "2C", "1D"};
     String[] player2Cards = {"6C", "6D", "6S", "8H", "QC"};
-    PokerPlayer pokerPlayer = new PokerPlayer();
+    PokerHands pokerHands = new PokerHands();
     //when
-    String result = pokerPlayer.compare(player1Cards, player2Cards);
+    String result = pokerHands.compare(player1Cards, player2Cards);
     //then
     Assertions.assertEquals("player2 win", result);
   }
