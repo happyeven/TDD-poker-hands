@@ -46,7 +46,12 @@ public class PokerUtils {
     public static Integer[] changeStringToInteger(String[] playerCards) {
         Integer[] result = new Integer[5];
         for (int index = 0; index < playerCards.length; index++) {
-            result[index] = getIntegerValue(Character.toString(playerCards[index].charAt(0)));
+            if(playerCards[index].length() == 3){
+                result[index] = Integer.parseInt(playerCards[index].substring(0,2));
+            }else{
+                result[index] = getIntegerValue(Character.toString(playerCards[index].charAt(0)));
+            }
+
         }
         return result;
     }
